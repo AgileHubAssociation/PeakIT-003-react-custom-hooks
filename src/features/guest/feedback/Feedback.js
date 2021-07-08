@@ -12,6 +12,12 @@ export default function Feedback() {
                     http://bit.ly/peakit003-feedback
                 </Link>
             </Typography>
+            <iframe
+                width="100%"
+                height="600"
+                src="http://bit.ly/peakit003-feedback"
+                title="Feedback Form"
+            ></iframe>
         </Container>
     );
 }

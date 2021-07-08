@@ -17,12 +17,13 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import { Route, Routes } from 'react-router-dom';
+import AddIcon from '@material-ui/icons/Add';
+import { NavLink, Route, Routes } from 'react-router-dom';
 
 import Copyright from '../components/Copyright';
 import NotFound from '../components/404/404';
 import { Button } from '@material-ui/core';
+import AddQuestion from '../features/trivia/AddQuestion';
 
 const drawerWidth = 240;
 
@@ -173,11 +174,11 @@ export default function AdminLayout() {
                 </div>
                 <Divider />
                 <List>
-                    <ListItem button>
+                    <ListItem button to="" component={NavLink}>
                         <ListItemIcon>
-                            <DashboardIcon />
+                            <AddIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Dashboard" />
+                        <ListItemText primary="Add Questions" />
                     </ListItem>
                 </List>
             </Drawer>
@@ -188,6 +189,7 @@ export default function AdminLayout() {
                         <Grid item xs={12}>
                             <Paper className={classes.paper}>
                                 <Routes>
+                                    <Route path="/" element={<AddQuestion />} />
                                     <Route
                                         path="*"
                                         element={<NotFound parent="admin" />}

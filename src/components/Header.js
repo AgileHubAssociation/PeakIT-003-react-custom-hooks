@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +27,11 @@ const useStyles = makeStyles((theme) => ({
     },
     buttonSpacer: {
         marginRight: theme.spacing(1),
+    },
+    linkActive: {
+        '&.active': {
+            color: theme.palette.primary.light,
+        },
     },
 }));
 
@@ -81,7 +87,11 @@ export default function Header() {
                         noWrap
                         key={link.title}
                         variant="body2"
-                        className={classes.toolbarLink}
+                        className={clsx(
+                            classes.toolbarLink,
+                            classes.linkActive
+                        )}
+                        end
                         to={link.url}
                         component={NavLink}
                     >

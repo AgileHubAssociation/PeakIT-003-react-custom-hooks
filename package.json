@@ -23,7 +23,7 @@
         "json-server-auth": "^2.0.2"
     },
     "scripts": {
-        "start": "concurrently \"react-scripts start\" \"json-server-auth server-db.json -r server-routes.json -p 3001",
+        "start": "concurrently \"react-scripts start\" \"json-server-auth server-db.json -r server-routes.json -p 3001\"",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"

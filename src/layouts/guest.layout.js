@@ -25,7 +25,6 @@ export default function GuestLayoyt() {
     const classes = useStyles();
     const { pathname } = useLocation();
     const mdSize = pathname === '/' ? 8 : 12;
-    console.log(pathname);
 
     return (
         <Container maxWidth="lg">

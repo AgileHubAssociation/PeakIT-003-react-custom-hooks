@@ -1,68 +1,67 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Exploring React Custom Hooks
 
-## Available Scripts
+## by Paul Negoescu
 
-In the project directory, you can run:
+This repo serves as the living demo for the workshop held at PeakIT 003.
 
-### `npm start`
+## You've finished the workshop already?
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+git switch workshop-end
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Stay in touch and stay curious!
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If none of this made sense, continue reading:
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+1. [Git](https://git-scm.com/)
+2. [NodeJS 14](https://nodejs.org/en/) (12 also works)
+3. Profit ...
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### I wanna work just locally:
 
-### `npm run eject`
+```
+git clone https://github.com/PaulNegoescu/ah-custom-hooks-workshop.git
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+cd ah-custom-hooks-workshop
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### I wanna keep my work for furture reference:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+First fork this repo using the fork link on github.
 
-## Learn More
+Clone your fork and then:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### But I already have a create-react-app installed because Paul told me so!
 
-### Code Splitting
+No worries! Navigate to it and:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```
+git remote add origin https://github.com/PaulNegoescu/ah-custom-hooks-workshop.git
 
-### Analyzing the Bundle Size
+git pull
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+npm install
+```
 
-### Making a Progressive Web App
+## Working on it
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Have ports `3000` and `3001` open!
 
-### Advanced Configuration
+```
+npm start
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This should also open your browser to the right page.

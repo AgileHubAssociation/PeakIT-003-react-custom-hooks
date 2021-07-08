@@ -4,13 +4,13 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Copyright from '../../../components/Copyright';
 import { Link as RouterLink } from 'react-router-dom';
+import { validateInputFields } from '../../../utils/validation';
+import { api } from '../../../utils/apiHelper';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -32,81 +32,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const validators = {
-    required: (value) => value.trim() !== '' && value.trim() !== 'off',
-    email: (value) => /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(value),
-    minLength: (value, length) => value.length >= length,
-    maxLength: (value, length) => value.length <= length,
-    min: (value, reference) => Number(value) >= reference,
-    max: (value, reference) => Number(value) <= reference,
-};
-
-function defaultMessages(fieldName, type, constraint) {
-    const messages = {
-        required: `You should provide a value for "${fieldName}".`,
-        email: `You should provide a valid email address.`,
-        minLength: `"${fieldName}" should be at least ${constraint} characters long.`,
-        maxLength: `"${fieldName}" should be at most ${constraint} characters long.`,
-        min: `"${fieldName}" should be at least ${constraint}.`,
-        max: `"${fieldName}" should be at most ${constraint}.`,
-    };
-    return messages[type];
-}
-
-class ValidationError extends Error {
-    constructor(message, values, validationRules) {
-        super(message);
-        this.values = values;
-        this.validationRules = validationRules;
-    }
-}
-function validateInputFields(values, validationRules) {
-    const errors = {};
-    let hasErrors = false;
-
-    for (const field in validationRules) {
-        for (const rule of validationRules[field]) {
-            if (values[field] === undefined) {
-                throw new ValidationError(
-                    `Validator did not get a field called "${field}"!`,
-                    values,
-                    validationRules
-                );
-            }
-
-            if (!validators[rule.type]) {
-                throw new ValidationError(
-                    `There is no "${rule.type}" validator!`,
-                    values,
-                    validationRules
-                );
-            }
-
-            console.log({
-                type: rule.type,
-                value: values[field],
-                constraint: rule.constraint,
-                field,
-                validator: validators[rule.type],
-                output: validators[rule.type](values[field], rule.constraint),
-            });
-            if (!validators[rule.type](values[field], rule.constraint)) {
-                const msg =
-                    rule.message ||
-                    defaultMessages(field, rule.type, rule.constraint);
-                hasErrors = true;
-
-                if (errors[field]) {
-                    errors[field].push(msg);
-                } else {
-                    errors[field] = [msg];
-                }
-            }
-        }
-    }
-    return [hasErrors, errors];
-}
-
 export default function Login() {
     const classes = useStyles();
 
@@ -126,10 +51,10 @@ export default function Login() {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
 
-    function handleLogin(e) {
+    async function handleLogin(e) {
         e.preventDefault();
 
-        const [hasErrors, errors] = validateInputFields(
+        const { hasErrors, errors } = validateInputFields(
             values,
             validationRules
         );
@@ -139,15 +64,11 @@ export default function Login() {
             return;
         }
 
-        fetch('http://localhost:3001/login', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify(values),
-        });
+        const data = await api('login')('create', values);
+
+        console.log(data);
     }
-    console.log(errors);
+
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
@@ -232,9 +153,6 @@ export default function Login() {
                     </Grid>
                 </form>
             </div>
-            <Box mt={8}>
-                <Copyright />
-            </Box>
         </Container>
     );
 }
